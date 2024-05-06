@@ -4,7 +4,7 @@
   "description": "adding sorting ability to HTML tables",
   "main": "Scripts/bootstrap-sortable.js",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/@metehaansever"
+    "registry": "https://npm.pkg.github.com/"
   },
   "scripts": {
     "test": "karma start karma.conf.js --single-run"
