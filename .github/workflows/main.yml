@@ -14,7 +14,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-          registry-url: https://npm.pkg.github.com/
+          registry-url: https://registery.npmjs.org
           scope: '@metehaansever'
       - run: npm install
       - name: Install PhantomJS
@@ -24,6 +24,7 @@ jobs:
           tar xjf phantomjs-1.9.8-linux-x86_64.tar.bz2 phantomjs-1.9.8-linux-x86_64/bin/phantomjs && \
           mv phantomjs-1.9.8-linux-x86_64/bin/phantomjs /usr/local/bin && \
           rm -r phantomjs-1.9.8-linux-x86_64*
-      - run: npm publish
+      - run: npm publish --access public
+        working-directory: my-package
         env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
