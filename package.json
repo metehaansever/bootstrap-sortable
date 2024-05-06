@@ -1,5 +1,5 @@
 {
-  "name": "bootstrap-sortable",
+  "name": "@metehaansever/bootstrap-sortable",
   "version": "1.11.2",
   "description": "adding sorting ability to HTML tables",
   "main": "Scripts/bootstrap-sortable.js",
