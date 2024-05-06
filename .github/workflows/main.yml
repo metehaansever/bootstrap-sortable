@@ -1,4 +1,4 @@
-name: Bootstrap sortable
+name: bootstrap-sortable
 
 on:
   push:
