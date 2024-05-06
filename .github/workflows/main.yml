@@ -11,29 +11,19 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
-
-      - name: Find PhantomJS path
-        id: phantomjs
-        run: |
-          echo "::set-output name=path::$(Rscript -e 'cat(shinytest:::phantom_paths()[[1]])')"
-      - name: Cache PhantomJS
-        uses: actions/cache@v1
-        with:
-          path: ${{ steps.phantomjs.outputs.path }}
-          key: ${{ runner.os }}-phantomjs
-          restore-keys: ${{ runner.os }}-phantomjs
-      - name: Install PhantomJS
-        run: >
-          Rscript
-          -e "if (!shinytest::dependenciesInstalled()) shinytest::installDependencies()"
-
       - uses: actions/setup-node@v1
         with:
-          node-version: 16
+          node-version: 12
           registry-url: https://npm.pkg.github.com/
           scope: '@metehaansever'
-
       - run: npm install
+      - name: Install PhantomJS
+        run: |
+          cd /tmp && \
+          curl -OL https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.8-linux-x86_64.tar.bz2 && \
+          tar xjf phantomjs-1.9.8-linux-x86_64.tar.bz2 phantomjs-1.9.8-linux-x86_64/bin/phantomjs && \
+          mv phantomjs-1.9.8-linux-x86_64/bin/phantomjs /usr/local/bin && \
+          rm -r phantomjs-1.9.8-linux-x86_64*
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
