@@ -12,8 +12,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install PhantomJS workaround
-        run: bash install-phantomjs.sh
+      - name: Find PhantomJS path
+        id: phantomjs
+        run: |
+          echo "::set-output name=path::$(Rscript -e 'cat(shinytest:::phantom_paths()[[1]])')"
+      - name: Cache PhantomJS
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.phantomjs.outputs.path }}
+          key: ${{ runner.os }}-phantomjs
+          restore-keys: ${{ runner.os }}-phantomjs
+      - name: Install PhantomJS
+        run: >
+          Rscript
+          -e "if (!shinytest::dependenciesInstalled()) shinytest::installDependencies()"
 
       - uses: actions/setup-node@v1
         with:
