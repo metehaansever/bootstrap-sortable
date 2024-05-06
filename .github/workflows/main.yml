@@ -21,6 +21,5 @@ jobs:
         run: chmod +x install_phantomjs.sh && bash install_phantomjs.sh
         
       - run: npm publish --access public
-        working-directory: my-package
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
