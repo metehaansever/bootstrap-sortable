@@ -12,8 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install PhantomJS
-        run: npm install phantomjs-prebuilt
+      - name: Install PhantomJS workaround
+        run: bash install-phantomjs.sh
 
       - uses: actions/setup-node@v1
         with:
