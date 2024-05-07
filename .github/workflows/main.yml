@@ -22,6 +22,8 @@ jobs:
         
       - run: npm ci
       - run: npm config set registry http://registry.npmjs.org/
+      - run: npm config rm proxy
+      - run: npm config rm https-proxy
       - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
