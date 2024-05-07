@@ -14,7 +14,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-          registry-url: "https://npm.pkg.github.com"
+          registry-url: "https://registery.npmjs.org"
           scope: '@metehaansever'
       - run: npm install
       - name: Install PhantomJS
@@ -24,7 +24,7 @@ jobs:
       - run: npm ci
       - run: npm config rm proxy
       - run: npm config rm https-proxy
-      - run: npm publish
+      - run: npm publish --access public
         working-directory: ../bootstrap-sortable
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
