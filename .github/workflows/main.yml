@@ -23,6 +23,7 @@ jobs:
       - run: npm ci
       - run: npm config rm proxy
       - run: npm config rm https-proxy
+      - run: npm login
       - run: cd ../../
       - run: npm publish --provenance --access public
         env:
