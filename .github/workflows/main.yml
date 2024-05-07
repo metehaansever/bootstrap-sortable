@@ -9,13 +9,14 @@ jobs:
   my_job:
     name: deploy to staging
     runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-          registry-url: "https://npm.pkg.github.com"
-          scope: '@metehaansever'
       - run: npm install
       - name: Install PhantomJS
         run: chmod +x install_phantomjs.sh && bash install_phantomjs.sh
@@ -26,5 +27,6 @@ jobs:
       - run: npm config rm https-proxy
       - run: npm publish --access public
         working-directory: ../bootstrap-sortable
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_GITHUB_TOKEN}}
+        with:
+          token: ${{secrets.NPM_GITHUB_TOKEN}}
+          registry: "https://npm.pkg.github.com"
