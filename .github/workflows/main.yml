@@ -25,6 +25,6 @@ jobs:
       - run: npm config rm proxy
       - run: npm config rm https-proxy
       - run: npm publish --provenance --access public
-        working-directory: bootstrap-sortable
+        working-directory: ../../bootstrap-sortable
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
