@@ -19,14 +19,14 @@ jobs:
           node-version: 12
       - run: npm install
       - name: Install PhantomJS
-        run: chmod +x install_phantomjs.sh && bash install_phantomjs.sh
-        
+        run: |
+          chmod +x install_phantomjs.sh
+          bash install_phantomjs.sh
       - run: npm build
       - run: npm ci
       - run: npm config rm proxy
       - run: npm config rm https-proxy
-      - run: npm publish --access public
-        working-directory: ../bootstrap-sortable
+      - name: Publish to GitHub Packages
+        run: npm publish --access public --registry=https://npm.pkg.github.com
         env:
-          token: ${{secrets.NPM_GITHUB_TOKEN}}
-          registry: "https://npm.pkg.github.com"
+          NODE_AUTH_TOKEN: ${{secrets.NPM_GITHUB_TOKEN}}
