@@ -1,13 +1,17 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# This script install PhantomJS in your Debian/Ubuntu System
+#
+# This script must be run as root:
+# sudo sh install_phantomjs.sh
+#
+sudo apt-get update
+sudo apt-get install build-essential chrpath libssl-dev libxft-dev -y
+sudo apt-get install libfreetype6 libfreetype6-dev -y
+sudo apt-get install libfontconfig1 libfontconfig1-dev -y
 
-# Download PhantomJS tarball
-curl -LO https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
+cd ~
+wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_JS.tar.bz2
+sudo tar xvjf $PHANTOM_JS.tar.bz2
 
-# Extract tarball
-tar xjf phantomjs-2.1.1-linux-x86_64.tar.bz2
-
-# Move PhantomJS binary to /usr/local/bin
-mv phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin
-
-# Cleanup
-rm -rf phantomjs-2.1.1-linux-x86_64*
+sudo mv $PHANTOM_JS /usr/local/share
+sudo ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin
