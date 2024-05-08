@@ -24,8 +24,8 @@ jobs:
       - name: npmrcgen
         run: |
           echo "//npm.pkg.github.com/:_authToken=${{secrets.NPM_AUTH_TOKEN}}" > .npmrc
-          echo "@xxxxx=https://npm.pkg.github.com/" >> .npmrc      
-      - run: npm cache clean --force   
+          echo "@metehaansever:registry=https://npm.pkg.github.com/" >> .npmrc      
+      # - run: npm cache clean --force   # Opsiyonel: npm cache temizlemeyi kaldırabilirsiniz.
       - run: npm install
       - name: Install PhantomJS
         run: chmod +x install_phantomjs.sh && bash install_phantomjs.sh
@@ -38,4 +38,3 @@ jobs:
         working-directory: ../bootstrap-sortable
         env:
           token: ${{secrets.NPM_GITHUB_TOKEN}}
-          registry: "https://npm.pkg.github.com"
