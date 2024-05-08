@@ -37,4 +37,4 @@ jobs:
       - run: npm publish --access public
         working-directory: ../bootstrap-sortable
         env:
-          token: ${{secrets.NPM_GITHUB_TOKEN}}
+          token: ${{secrets.npm_token}}
