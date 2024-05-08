@@ -27,6 +27,6 @@ jobs:
       - run: npm config rm https-proxy
       - run: npm publish --access public
         working-directory: ../bootstrap-sortable
-        env:
+        with:
           token: ${{secrets.NPM_GITHUB_TOKEN}}
           registry: "https://npm.pkg.github.com"
