@@ -16,8 +16,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Set up npmrc
         run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_GITHUB_TOKEN }}" > .npmrc
-      - name: Load npm configuration
-        run: npm config load
       - run: npm install
       - name: Install PhantomJS
         run: chmod +x install_phantomjs.sh && bash install_phantomjs.sh
