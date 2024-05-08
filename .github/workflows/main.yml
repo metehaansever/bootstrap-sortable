@@ -14,17 +14,15 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v2
-      - name: Set up npmrc
-        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_GITHUB_TOKEN }}" > .npmrc
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm install phantomjs-prebuilt@2.1.16
       - run: npm install
-      - name: Install PhantomJS
-        run: chmod +x install_phantomjs.sh && bash install_phantomjs.sh
       - run: npm build
       - run: npm ci
       - run: npm config rm proxy
       - run: npm config rm https-proxy
       - run: npm publish --access public
         env:
-          NPM_CONFIG_USERCONFIG: .npmrc
           NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
-
